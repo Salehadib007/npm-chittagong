@@ -6,20 +6,29 @@ const QRImage = ({ value }) => {
 
   useEffect(() => {
     if (!value) return;
-
     QRCode.toDataURL(value, {
-      width: 300, // must be a number
-      margin: 2,
+      width: 300,
+      margin: 0, // ← ZERO margin, no whitespace border
       errorCorrectionLevel: "M",
     })
       .then((url) => setSrc(url))
       .catch((err) => console.error(err));
   }, [value]);
 
-  if (!src) return <p>Generating QR...</p>;
+  if (!src) return null;
 
   return (
-    <img src={src} alt="QR Code" style={{ width: "100%", maxWidth: "300px" }} />
+    <img
+      src={src}
+      alt="QR"
+      style={{
+        width: "100%",
+        height: "100%",
+        display: "block",
+        margin: 0,
+        padding: 0,
+      }}
+    />
   );
 };
 

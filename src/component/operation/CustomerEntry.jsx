@@ -24,6 +24,26 @@ export default function CustomerEntry() {
     year: "",
   });
 
+  // Prepare options
+  const jobLocationOptions =
+    setup?.JobLocation?.map((loc) => ({
+      value: loc,
+      label: loc,
+    })) || [];
+
+  // Custom filter: letter-by-letter, starts from first letter, case-sensitive
+  const filterOption = (option, inputValue) => {
+    if (!inputValue) return true;
+    return option.label.startsWith(inputValue); // matches beginning of the option
+  };
+
+  // Handle change
+  const handleJobLocationChange = (selectedOption) => {
+    handleChange({
+      target: { name: "jobLocation", value: selectedOption?.value || "" },
+    });
+  };
+
   const locationOptions = registrations.flatMap((r) => r.location || []);
   const unitOptions = registrations.flatMap((r) => r.unit || []);
 
@@ -226,11 +246,13 @@ export default function CustomerEntry() {
                 value={enrollment.brNoOrNid}
                 onChange={handleChange}
               />
-              <Select
+              <Input
                 label="* Job Location"
+                required
                 name="jobLocation"
                 value={enrollment.jobLocation}
                 onChange={handleChange}
+                searchable
                 options={setup?.JobLocation || []}
               />
               <Select
@@ -542,6 +564,7 @@ export default function CustomerEntry() {
 }
 
 /* ================= Reusable Components ================= */
+
 function Input({
   label,
   required,
@@ -551,7 +574,96 @@ function Input({
   value,
   onChange,
   inputRef,
+  searchable = false,
+  options = [], // pass JobLocation array here if searchable
 }) {
+  const [query, setQuery] = useState(value || "");
+  const [showOptions, setShowOptions] = useState(false);
+  const wrapperRef = useRef(null);
+
+  // Filter options based on query (startsWith, case-sensitive)
+  const filteredOptions = query
+    ? options.filter((opt) => opt.toLowerCase().startsWith(query))
+    : options;
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+        setShowOptions(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  // Handle selection
+  const handleSelect = (val) => {
+    onChange({ target: { name, value: val } });
+    setQuery(val);
+    setShowOptions(false);
+  };
+
+  if (type === "date") {
+    return (
+      <div className={className}>
+        {label && (
+          <label className="block text-sm font-medium mb-1">
+            {label} {required && <span className="text-red-500">*</span>}
+          </label>
+        )}
+        <DatePicker
+          selected={value ? new Date(value) : null}
+          onChange={(date) => onChange({ target: { name, value: date } })}
+          dateFormat="dd-MMM-yyyy"
+          className="w-full border border-gray-400 px-2 py-1 text-[13px] focus:outline-none"
+          placeholderText="dd/mm/yy"
+        />
+      </div>
+    );
+  }
+
+  if (searchable) {
+    return (
+      <div className={`relative ${className}`} ref={wrapperRef}>
+        {label && (
+          <label className="block text-sm font-medium mb-1">
+            {label} {required && <span className="text-red-500">*</span>}
+          </label>
+        )}
+
+        <input
+          type="text"
+          name={name}
+          value={query}
+          onChange={(e) => {
+            setQuery(e.target.value);
+            onChange(e);
+            setShowOptions(true);
+          }}
+          onFocus={() => setShowOptions(true)}
+          className="w-full border border-gray-400 px-2 py-1 text-[13px] focus:outline-none"
+          placeholder="Type to search..."
+        />
+
+        {showOptions && filteredOptions.length > 0 && (
+          <ul className="absolute z-10 w-full bg-white border border-gray-300 rounded-lg mt-1 max-h-48 overflow-y-auto shadow-lg">
+            {filteredOptions.map((opt, idx) => (
+              <li
+                key={idx}
+                onClick={() => handleSelect(opt)}
+                className="px-4 py-2 cursor-pointer hover:bg-indigo-100"
+              >
+                {opt}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    );
+  }
+
+  // Normal input
   return (
     <div className={className}>
       {label && (
@@ -559,32 +671,14 @@ function Input({
           {label} {required && <span className="text-red-500">*</span>}
         </label>
       )}
-
-      {type === "date" ? (
-        <DatePicker
-          selected={value ? new Date(value) : null}
-          onChange={(date) =>
-            onChange({
-              target: {
-                name,
-                value: date, // pass Date object directly
-              },
-            })
-          }
-          dateFormat="dd-MMM-yyyy"
-          className="w-full border border-gray-400 px-2 py-1 text-[13px] focus:outline-none"
-          placeholderText="dd/mm/yy"
-        />
-      ) : (
-        <input
-          ref={inputRef}
-          type={type}
-          name={name}
-          value={value}
-          onChange={onChange}
-          className="w-full border border-gray-400 px-2 py-1 text-[13px] focus:outline-none"
-        />
-      )}
+      <input
+        ref={inputRef}
+        type={type}
+        name={name}
+        value={value}
+        onChange={onChange}
+        className="w-full border border-gray-400 px-2 py-1 text-[13px] focus:outline-none"
+      />
     </div>
   );
 }

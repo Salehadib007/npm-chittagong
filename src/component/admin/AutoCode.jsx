@@ -13,19 +13,17 @@ const AutoQRCode = () => {
 
   useEffect(() => {
     if (ids.length === 0) return;
-
     const fetchData = async () => {
       try {
         setLoading(true);
         const res = await api.get(`/enrollment/${ids.join(",")}`);
-        setEnrollments(res.data);
+        setEnrollments(res.data.reverse());
       } catch (error) {
         console.error("Failed to fetch enrollments", error);
       } finally {
         setLoading(false);
       }
     };
-
     fetchData();
   }, [ids]);
 
@@ -40,7 +38,7 @@ const AutoQRCode = () => {
         </div>
       ) : (
         <div className="qr-grid">
-          {enrollments.map((item, index) => {
+          {enrollments.map((item) => {
             const formattedString = [
               `Serial: ${item.pno || ""}`,
               `Name: ${item.fullName || ""}`,
@@ -54,33 +52,26 @@ const AutoQRCode = () => {
               `Mobile: ${item.primaryMobile || item.alternativeMobile || ""}`,
             ].join("\n");
 
-            const url = formattedString;
-
             return (
               <div key={item._id} className="qr-card">
-                {/* Top Section */}
                 <div className="qr-top">
                   <div className="qr-image">
-                    <QRImage value={url} />
+                    <QRImage value={formattedString} />
                   </div>
-
                   <div className="qr-serial">{item.enrollmentId}</div>
                 </div>
-
-                {/* Bottom Section */}
                 <div className="qr-bottom">
-                  <div>
-                    <strong className="font-black ">REG NO: </strong>
+                  <div className="qr-row">
+                    <b>REG NO: </b>
                     {item.registrationNo}
                   </div>
-                  <div>
-                    <strong className="font-black ">ISSUE DATE: </strong>
+                  <div className="qr-row">
+                    <b>ISSUE DATE:</b>
                     {formatDate(item.issueDate)}
                   </div>
-                  <div>
-                    <strong className="font-black text-xs">
-                      VALIDITY: {formatDate(item.validity)}
-                    </strong>
+                  <div className="qr-row">
+                    <b>VALIDITY: </b>
+                    {formatDate(item.validity)}
                   </div>
                 </div>
               </div>
@@ -89,120 +80,117 @@ const AutoQRCode = () => {
         </div>
       )}
 
-      {/* Print Button */}
-      <div className="print:hidden print-button pt-4 ">
-        <button onClick={() => window.print()}>Print / Save as PDF</button>
+      <div
+        className="print-hide"
+        style={{ marginTop: 16, textAlign: "center" }}
+      >
+        <button className="print-btn" onClick={() => window.print()}>
+          Print / Save as PDF
+        </button>
       </div>
 
-      {/* Styles */}
-      <style>
-        {`
-          body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-          }
+      <style>{`
+        * { box-sizing: border-box; }
 
-          .qr-wrapper {
-            padding: 20px;
-            text-align: center;
-          }
+        body { margin: 0; font-family: Arial, sans-serif; background: #e8e8e8; }
 
-          /* Loading */
-          .loading-container {
-            margin-top: 40px;
-          }
+        .qr-wrapper { padding: 20px; }
 
-          .loader {
-            width: 50px;
-            height: 50px;
-            margin: auto;
-            border: 5px solid #f3f3f3;
-            border-top: 5px solid #555;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-          }
+        .loading-container { margin-top: 40px; text-align: center; }
+        .loader {
+          width: 48px; height: 48px; margin: 12px auto 0;
+          border: 5px solid #ddd; border-top-color: #444;
+          border-radius: 50%; animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
 
-          @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-          }
+        /* ── 4 columns on screen ── */
+        .qr-grid {
+          display: grid;
+          grid-template-columns: repeat(5, 200px);
+          gap: 8px;
+          justify-content: center;
+        }
 
-          /* SCREEN Layout */
-          .qr-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 5px;
-            justify-items: center;
-          }
+        /* ── Card ── */
+        .qr-card {
+          width: 200px;
+          border: 3.5px solid #000;
+          background: #fff;
+        }
 
-          .qr-card {
-            border: 2px solid black;
-            width: 100%;
-            max-width: 220px;
-            font-size: 9px;
-          }
+        /* ── Top: QR left | Serial right ── */
+        .qr-top { display: flex; height: 80px; }
 
-          .qr-top {
-            display: flex;
-          }
+        .qr-image {
+          flex: 0 0 80px;
+          display: flex;
+          width: 85px;
+          height: 80px;
+          border-right: 3.5px solid #000;
+          justify-content: center;
+          align-items: center;
+          overflow: hidden;
+          line-height: 0;
+          font-size: 0;
+        }
+        /* Force QR to fill the box with zero whitespace */
+        .qr-image img {
+          width: 76px !important;
+          height: 76px !important;
+          max-width: none !important;
+          display: block !important;
+          margin: 0 !important;
+          padding: 0 !important;
+        }
 
-          .qr-image {
-            flex: 1;
-            border-right: 2px solid black;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-          }
+        .qr-serial {
+          flex: 1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 18px;
+          font-weight: 900;
+          color: #000;
+        }
 
-          .qr-serial {
-            width: 55%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 15px;
-          }
+        /* ── Bottom ── */
+        .qr-bottom {
+          border-top: 3.5px solid #000;
+          padding: 3px 5px 3px;
+        }
+        .qr-row {
+          font-size: 12px;
+          font-family: Arial, sans-serif;
+          color: #000;
+          line-height: 1.1;
+          letter-spacing: 1px;
+          white-space: nowrap;
+        }
 
-          .qr-bottom {
-            border-top: 2px solid black;
-            padding: 4px;
-            text-align: left;
-          }
+        .print-btn {
+          padding: 9px 22px;
+          border: 2px solid #000;
+          background: #fff;
+          font-weight: 700;
+          font-size: 12px;
+          cursor: pointer;
+        }
+        .print-btn:hover { background: #000; color: #fff; }
 
-          .print-button {
-            margin-top: 2px;
-          }
-
-          .print-button button {
-            padding: 10px 20px;
-            border: 2px solid black;
-            background: white;
-            font-weight: 600;
-            cursor: pointer;
-          }
-
-          .print-button button:hover {
-            background: black;
-            color: white;
-          }
-          /* PRINT Layout */
-          @media print {
-
-  /* Reset page */
+        /* ── Print: same as screen ── */
+        @media print {
   html, body {
     margin: 0 !important;
     padding: 0 !important;
     background: #fff !important;
   }
 
-  /* Hide everything */
   body * {
     visibility: hidden !important;
   }
 
-  /* Show only QR wrapper */
-  .qr-wrapper,
-  .qr-wrapper * {
+  .qr-wrapper, .qr-wrapper * {
     visibility: visible !important;
   }
 
@@ -211,33 +199,33 @@ const AutoQRCode = () => {
     left: 0;
     top: 0;
     width: 100%;
-    padding: 8mm;
+    padding: 0mm;
   }
 
-  /* Hide print button */
-  .print-button {
+  .print-hide {
     display: none !important;
   }
 
-  /* Print grid layout */
+  /* Perfect 4 per row for A4 */
   .qr-grid {
     display: grid !important;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 5mm;
+    grid-template-columns: repeat(4, 47mm) !important;
+    gap: 3mm !important;
+    justify-content: center !important;
   }
 
   .qr-card {
+    width: 48mm !important;
     page-break-inside: avoid;
     break-inside: avoid;
   }
 
   @page {
     size: A4 portrait;
-    margin: 8mm;
+    margin: 5mm;
   }
 }
-        `}
-      </style>
+      `}</style>
     </div>
   );
 };

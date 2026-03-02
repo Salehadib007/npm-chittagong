@@ -140,7 +140,7 @@ export default function Home() {
   useEffect(() => {
     if (enrollments.length === 0) return;
 
-    const total = getTotalVehicles(setup?.VehicleBrand).length;
+    const total = getTotalVehicles(enrollments).length;
     const active = getActiveVehicles(enrollments).length;
     const inactive = getInactiveVehicles(enrollments).length;
     const taxExpired = getTaxTokenExpired(enrollments).length;

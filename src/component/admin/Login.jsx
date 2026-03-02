@@ -46,8 +46,7 @@ export default function Login() {
     <div
       className="min-h-screen flex items-center justify-center bg-cover bg-center relative"
       style={{
-        backgroundImage:
-          "url('https://joinnavy.navy.mil.bd/images/gallery/gallery-img-17.png')",
+        backgroundImage: "url('/bg.png')",
       }}
     >
       <div className="absolute inset-0 bg-white/70"></div>
