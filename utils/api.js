@@ -1,7 +1,7 @@
 "use client";
 import axios from "axios";
-import { getAuth, getToken } from "./auth";
-import { useAuth } from "../context/AuthContext";
+// import { getAuth, getToken } from "./auth";
+// import { useAuth } from "../context/AuthContext";
 
 const api = axios.create({
   baseURL: "https://navy-server.vercel.app/api",

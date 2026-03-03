@@ -637,7 +637,7 @@ function Input({
           name={name}
           value={query}
           onChange={(e) => {
-            setQuery(e.target.value);
+            setQuery(e.target.value.toLowerCase());
             onChange(e);
             setShowOptions(true);
           }}
