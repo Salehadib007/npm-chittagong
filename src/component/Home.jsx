@@ -287,22 +287,22 @@ export default function Home() {
           {[
             {
               name: `Car`,
-              value: `${typeCar.filter((item) => item.toLowerCase() === "car").length}`,
+              value: `${enrollments.filter((item) => item.vehicleType.toLowerCase() === "car").length}`,
               icon: <FaCar />,
             },
             {
               name: `Pickup`,
-              value: `${typeCar.filter((item) => item.toLowerCase() === "pickup").length}`,
+              value: `${enrollments.filter((item) => item.vehicleType.toLowerCase() === "pickup").length}`,
               icon: <FaTruckPickup />,
             },
             {
               name: `Motorcycle`,
-              value: `${typeCar.filter((item) => item.toLowerCase() === "motorcycle").length}`,
+              value: `${enrollments.filter((item) => item.vehicleType.toLowerCase() === "motorcycle").length}`,
               icon: <FaMotorcycle />,
             },
             {
               name: `Bus`,
-              value: `${typeCar.filter((item) => item.toLowerCase() === "microbus").length}`,
+              value: `${enrollments.filter((item) => item.vehicleType.toLowerCase() === "microbus").length}`,
               icon: <FaBus />,
             },
           ].map((item, index) => (
