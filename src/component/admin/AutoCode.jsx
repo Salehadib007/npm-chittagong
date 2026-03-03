@@ -224,8 +224,8 @@ const AutoQRCode = () => {
 
   /* ===== CARD SIZE ===== */
   .qr-card {
-    width: 4.4cm !important;
-    height: 3.2cm !important;
+    width: 4.2cm !important;
+    height: 3cm !important;
     border: 1mm solid #000 !important;
     box-sizing: border-box;
     page-break-inside: avoid !important;
@@ -240,7 +240,7 @@ const AutoQRCode = () => {
 
   /* ===== QR IMAGE 2cm × 2cm ===== */
   .qr-image {
-    width: 2cm !important;
+    width: 1.9cm !important;
     height: 2cm !important;
     border-right: 1mm solid #000 !important;
     display: flex;
@@ -249,14 +249,14 @@ const AutoQRCode = () => {
   }
 
   .qr-image img {
-    width: 1.95cm !important;
-    height: 1.9cm !important;
+    width: 1.92cm !important;
+    height: 1.92cm !important;
   }
 
   /* ===== SERIAL 2.4cm × 2cm ===== */
   .qr-serial {
-    width: 2.4cm !important;
-    height: 2cm !important;
+    width: 2.3cm !important;
+    height: 1.9cm !important;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -266,9 +266,9 @@ const AutoQRCode = () => {
 
   /* ===== BOTTOM SECTION (Remaining 1.2cm) ===== */
   .qr-bottom {
-    height: 1.2cm !important;
+    height: 1.1cm !important;
     border-top: 1mm solid #000 !important;
-    padding: 1mm 2mm !important;
+    padding: 0.5mm 2mm !important;
   }
 
   .qr-row {
