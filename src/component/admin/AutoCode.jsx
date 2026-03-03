@@ -178,7 +178,8 @@ const AutoQRCode = () => {
         .print-btn:hover { background: #000; color: #fff; }
 
         /* ── Print: same as screen ── */
-        @media print {
+       @media print {
+
   html, body {
     margin: 0 !important;
     padding: 0 !important;
@@ -189,7 +190,8 @@ const AutoQRCode = () => {
     visibility: hidden !important;
   }
 
-  .qr-wrapper, .qr-wrapper * {
+  .qr-wrapper,
+  .qr-wrapper * {
     visibility: visible !important;
   }
 
@@ -198,31 +200,84 @@ const AutoQRCode = () => {
     left: 0;
     top: 0;
     width: 100%;
-    padding: 0mm;
+    padding: 0;
   }
 
   .print-hide {
     display: none !important;
   }
 
-  /* Perfect 4 per row for A4 */
-  .qr-grid {
-    display: grid !important;
-    grid-template-columns: repeat(4, 47mm) !important;
-    gap: 3mm !important;
-    justify-content: center !important;
-  }
-
-  .qr-card {
-    width: 48mm !important;
-    page-break-inside: avoid;
-    break-inside: avoid;
-  }
-
+  /* ===== A4 Page ===== */
   @page {
     size: A4 portrait;
     margin: 5mm;
+
   }
+
+  /* ===== Layout: 4 per row ===== */
+  .qr-grid {
+    display: flex !important;
+    flex-wrap: wrap;
+    gap: 3mm;
+    justify-content: center;
+  }
+
+  /* ===== CARD SIZE ===== */
+  .qr-card {
+    width: 4.4cm !important;
+    height: 3.2cm !important;
+    border: 1mm solid #000 !important;
+    box-sizing: border-box;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  /* ===== TOP SECTION (2cm height) ===== */
+  .qr-top {
+    display: flex;
+    height: 2cm !important;
+  }
+
+  /* ===== QR IMAGE 2cm × 2cm ===== */
+  .qr-image {
+    width: 2cm !important;
+    height: 2cm !important;
+    border-right: 1mm solid #000 !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .qr-image img {
+    width: 1.95cm !important;
+    height: 1.9cm !important;
+  }
+
+  /* ===== SERIAL 2.4cm × 2cm ===== */
+  .qr-serial {
+    width: 2.4cm !important;
+    height: 2cm !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10pt !important;
+    font-weight: 700;
+  }
+
+  /* ===== BOTTOM SECTION (Remaining 1.2cm) ===== */
+  .qr-bottom {
+    height: 1.2cm !important;
+    border-top: 1mm solid #000 !important;
+    padding: 1mm 2mm !important;
+  }
+
+  .qr-row {
+    font-size: 7pt !important;
+    line-height: 1.1 !important;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+  }
+
 }
       `}</style>
     </div>
