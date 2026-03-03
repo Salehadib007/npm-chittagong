@@ -40,10 +40,9 @@ const AutoQRCode = () => {
         <div className="qr-grid">
           {enrollments.map((item) => {
             const formattedString = [
-              `Serial: ${item.pno || ""}`,
-              `Name: ${item.fullName || ""}`,
-              `Rank: ${item.officialRank || ""}`,
-              `BR/ID No: ${item.brNoOrNid || ""}`,
+              `Serial: ${item.enrollmentId || ""}`,
+              `Name and Rank: ${item.officialRank || ""} ${item.fullName || ""}`,
+              `PNO No: ${item.pno || ""}`,
               `Tax: ${formatDate(item.taxToken)}`,
               `Reg No: ${item.registrationNo || ""}`,
               `Issue: ${formatDate(item.issueDate)}`,
@@ -71,7 +70,7 @@ const AutoQRCode = () => {
                   </div>
                   <div className="qr-row">
                     <b>VALIDITY: </b>
-                    {formatDate(item.validity)}
+                    <strong>{formatDate(item.validity)}</strong>
                   </div>
                 </div>
               </div>
@@ -125,7 +124,7 @@ const AutoQRCode = () => {
         .qr-image {
           flex: 0 0 80px;
           display: flex;
-          width: 85px;
+          width: 83px;
           height: 80px;
           border-right: 3.5px solid #000;
           justify-content: center;
@@ -136,7 +135,7 @@ const AutoQRCode = () => {
         }
         /* Force QR to fill the box with zero whitespace */
         .qr-image img {
-          width: 76px !important;
+          width: 73px !important;
           height: 76px !important;
           max-width: none !important;
           display: block !important;
@@ -149,8 +148,8 @@ const AutoQRCode = () => {
           display: flex;
           align-items: center;
           justify-content: center;
-          font-size: 18px;
-          font-weight: 900;
+          font-size: 15px;
+          font-weight: 700;
           color: #000;
         }
 
