@@ -618,6 +618,9 @@ function Input({
           dateFormat="dd-MMM-yyyy"
           className="w-full border border-gray-400 px-2 py-1 text-[13px] focus:outline-none"
           placeholderText="dd/mm/yy"
+          showMonthDropdown
+          showYearDropdown
+          dropdownMode="select"
         />
       </div>
     );

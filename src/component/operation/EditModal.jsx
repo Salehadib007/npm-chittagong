@@ -974,6 +974,9 @@ function Input({
           onChange={(date) => onChange({ target: { name, value: date } })}
           dateFormat="dd-MMM-yyyy"
           className="w-full border border-gray-400 px-2 py-1 text-[13px] focus:outline-none"
+          showMonthDropdown
+          showYearDropdown
+          dropdownMode="select"
         />
       ) : (
         <input
