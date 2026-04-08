@@ -1,20 +1,26 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function VehicleTable({ items }) {
   const [search, setSearch] = useState("");
+  const location = useLocation();
   const navigate = useNavigate();
 
-  const vehicles = items || [];
+  // ✅ Merge both sources
+  const stateVehicles = location.state || [];
+  const propVehicles = items || [];
+  const vehicles = [...stateVehicles, ...propVehicles];
 
+  // ✅ Filter logic
   const filtered = vehicles.filter((v) =>
     `${v.vehicleType} ${v.vehicleBrand} ${v.registrationNo}`
       .toLowerCase()
       .includes(search.toLowerCase()),
   );
 
-  const showData = (data) => {
-    navigate("/vehicle-Details", { state: data });
+  // Example navigation handler (keep if needed)
+  const showData = (vehicle) => {
+    navigate("/vehicle-details", { state: vehicle });
   };
 
   return (
@@ -26,14 +32,14 @@ export default function VehicleTable({ items }) {
 
           <input
             type="text"
-            placeholder="Search vehicle..."
+            placeholder="Search..."
+            className="border px-3 py-2 rounded-md text-sm"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="border rounded-lg px-3 py-2 text-sm w-64"
           />
         </div>
 
-        {/* Print Title (only visible in print) */}
+        {/* Print Title */}
         <div className="hidden print:block text-center py-4">
           <h1 className="text-xl font-bold">Active Vehicle Report</h1>
           <p className="text-sm">
@@ -59,7 +65,7 @@ export default function VehicleTable({ items }) {
             <tbody>
               {filtered.length === 0 ? (
                 <tr>
-                  <td colSpan={7} className="text-center py-6 text-slate-500">
+                  <td colSpan="7" className="text-center py-4 text-gray-500">
                     No vehicles found
                   </td>
                 </tr>
