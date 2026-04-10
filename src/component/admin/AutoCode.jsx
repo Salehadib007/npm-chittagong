@@ -85,7 +85,7 @@ const AutoQRCode = () => {
                     {item.registrationNo}
                   </div>
                   <div className="qr-row">
-                    <b>ISSUE DATE:</b>
+                    <b>ISSUE DATE: </b>
                     {formatDate(item.issueDate)}
                   </div>
                   <div className="qr-row">
@@ -255,13 +255,13 @@ const AutoQRCode = () => {
   /* ===== TOP SECTION (2cm height) ===== */
   .qr-top {
     display: flex;
-    height: 2cm !important;
+    height: 1.9cm !important;
   }
 
   /* ===== QR IMAGE 2cm × 2cm ===== */
   .qr-image {
     width: 1.8cm !important;
-    height: 2cm !important;
+    height: 1.9cm !important;
     border-right: 1mm solid #000 !important;
     display: flex;
     justify-content: center;
@@ -269,14 +269,14 @@ const AutoQRCode = () => {
   }
 
   .qr-image img {
-    width: 1.92cm !important;
-    height: 1.92cm !important;
+    width: 1.9cm !important;
+    height: 1.82cm !important;
   }
 
   /* ===== SERIAL 2.4cm × 2cm ===== */
   .qr-serial {
     width: 2.4cm !important;
-    height: 1.9cm !important;
+    height: 1.8cm !important;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -286,16 +286,18 @@ const AutoQRCode = () => {
 
   /* ===== BOTTOM SECTION (Remaining 1.2cm) ===== */
   .qr-bottom {
-    height: 1.1cm !important;
+    height: 1.2cm !important;
     border-top: 1mm solid #000 !important;
     padding: 0.5mm 2mm !important;
   }
 
   .qr-row {
-    font-size: 6.1pt !important;
+    font-size: 6.7pt !important;
     line-height: 1.1 !important;
-    letter-spacing: 0.5px;
+    letter-spacing: 1.6px;
     white-space: nowrap;
+    margin-left: -1mm !important
+
   }
 
 }

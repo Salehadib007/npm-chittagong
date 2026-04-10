@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import VehicleTable from "./setup/VehicleTable";
+// import VehicleTable from "./setup/VehicleTable";
 import api from "../../utils/api";
+import PersonnelVehicleTable from "./setup/PersonnelVehicleTable";
 
 const Report = () => {
   const [enrollments, setEnrollments] = useState([]);
@@ -47,7 +48,7 @@ const Report = () => {
         </button>
       </div>
 
-      <VehicleTable items={enrollments} />
+      <PersonnelVehicleTable items={enrollments} />
     </div>
   );
 };
