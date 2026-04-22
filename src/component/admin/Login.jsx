@@ -65,7 +65,7 @@ export default function Login() {
             <span className="text-blue-900">M</span>
           </h1>
           <p className="text-xs text-gray-600 text-center mt-1">
-            NAVAL PROVOST MARSHAL - KHULNA
+            NAVAL PROVOST MARSHAL - CHITTAGONG
           </p>
         </div>
 
