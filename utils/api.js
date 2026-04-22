@@ -4,7 +4,7 @@ import axios from "axios";
 // import { useAuth } from "../context/AuthContext";
 
 const api = axios.create({
-  baseURL: "https://npm-chittagong-server.vercel.app/api",
+  baseURL: "https://npm-chittagong-server-pi.vercel.app/api",
   // baseURL: "http://localhost:5000/api",
   withCredentials: true,
 });
