@@ -13,7 +13,7 @@ const AutoQRCode = () => {
   const [loading, setLoading] = useState(true);
   const [enrollments, setEnrollments] = useState([]);
 
-  console.log(enrollments);
+  // console.log(enrollments);
 
   useEffect(() => {
     if (selections.length === 0) return;
@@ -59,17 +59,18 @@ const AutoQRCode = () => {
       ) : (
         <div className="qr-grid">
           {enrollments.map((item) => {
-            const formattedString = [
-              `Serial: ${item.serial || ""}/${new Date(item.createdAt).getFullYear().toString().slice(-2) || ""}`,
-              `Name and Rank: ${item.officialRank || ""} ${item.fullName || ""}`,
-              `PNO No: ${item.pno || ""}`,
-              `Tax: ${formatDate(item.taxToken)}`,
-              `Reg No: ${item.registrationNo || ""}`,
-              `Issue: ${formatDate(item.issueDate)}`,
-              `Fitness: ${formatDate(item.fitness)}`,
-              `Validity: ${formatDate(item.validity)}`,
-              `Mobile: ${item.primaryMobile || item.alternativeMobile || ""}`,
-            ].join("\n");
+            // const formattedString = [
+            //   `Serial: ${item.serial || ""}/${new Date(item.createdAt).getFullYear().toString().slice(-2) || ""}`,
+            //   `Name and Rank: ${item.officialRank || ""} ${item.fullName || ""}`,
+            //   `PNO No: ${item.pno || ""}`,
+            //   `Tax: ${formatDate(item.taxToken)}`,
+            //   `Reg No: ${item.registrationNo || ""}`,
+            //   `Issue: ${formatDate(item.issueDate)}`,
+            //   `Fitness: ${formatDate(item.fitness)}`,
+            //   `Validity: ${formatDate(item.validity)}`,
+            //   `Mobile: ${item.primaryMobile || item.alternativeMobile || ""}`,
+            // ].join("\n");
+            const formattedString = `https://npm-chittagong-nu.vercel.app/permit/${item.enrollmentId}`;
 
             return (
               <div key={item._id} className="qr-card">

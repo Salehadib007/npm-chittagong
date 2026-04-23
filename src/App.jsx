@@ -36,6 +36,7 @@ import VehicleTable from "./component/setup/VehicleTable";
 import VehicleDetails from "./component/setup/VehicleDetails";
 import VehicleType from "./component/setup/VehicleType";
 import Report from "./component/Report";
+import EnrollmentProfileView from "./component/admin/EnrollmentProfileView";
 
 const App = () => {
   const { auth } = useAuth();
@@ -136,6 +137,10 @@ const App = () => {
         {
           path: "enrollment-list",
           element: can("Enrollment") && <AutoQRCode />,
+        },
+        {
+          path: "permit/:enrollmentId",
+          element: <EnrollmentProfileView />,
         },
         {
           path: "show-data/:id",
