@@ -32,7 +32,7 @@ export default function Customer() {
   const [uploading, setUploading] = useState(false);
 
   const [selectedIds, setSelectedIds] = useState([]);
-  console.log(selectedIds);
+  // console.log(selectedIds);
   const navigate = useNavigate();
 
   const toggleSelect = (id, serial) => {
@@ -133,8 +133,9 @@ export default function Customer() {
 
   const showDetails = async (id) => {
     const res = await api.get(`/enrollment/${id}`);
+    console.log(res.data);
     navigate("/enrollment-details", {
-      state: { enrollmentId: res?.data[0]?._id },
+      state: { enrollmentId: res?.data?._id },
     });
   };
 

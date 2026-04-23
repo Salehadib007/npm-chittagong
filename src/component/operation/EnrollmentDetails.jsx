@@ -284,6 +284,7 @@ const ImageBox = ({ src, onClick }) =>
 export default function EnrollmentDetails() {
   const location = useLocation();
   const enrollmentId = location.state?.enrollmentId;
+  console.log(enrollmentId);
 
   const [enrollment, setEnrollment] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -294,7 +295,10 @@ export default function EnrollmentDetails() {
       if (!enrollmentId) return;
       try {
         setLoading(true);
+
         const { data } = await api.get(`/enrollment/${enrollmentId}`);
+        console.log(data);
+
         setEnrollment(data);
       } catch (err) {
         console.error(err);
