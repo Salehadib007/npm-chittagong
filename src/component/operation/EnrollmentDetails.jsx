@@ -295,7 +295,7 @@ export default function EnrollmentDetails() {
       try {
         setLoading(true);
         const { data } = await api.get(`/enrollment/${enrollmentId}`);
-        setEnrollment(data[0]);
+        setEnrollment(data);
       } catch (err) {
         console.error(err);
         alert("Failed to fetch enrollment data!");
