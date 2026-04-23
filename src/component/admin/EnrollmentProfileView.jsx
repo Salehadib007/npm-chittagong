@@ -16,7 +16,7 @@ const EnrollmentProfileView = () => {
       try {
         // using _id from QR
         const res = await api.get(`/enrollment/${enrollmentId}`);
-
+        log(res.data);
         setItem(res.data);
       } catch (err) {
         console.error(err);
