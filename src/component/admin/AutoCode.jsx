@@ -31,7 +31,7 @@ const AutoQRCode = () => {
 
         const ids = selections.map((s) => s.id);
 
-        const res = await api.get(`/enrollment/${ids.join(",")}`);
+        const res = await api.get(`/enrollment/bulk/${ids.join(",")}`);
 
         if (!isMounted) return;
 
