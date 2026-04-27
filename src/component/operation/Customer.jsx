@@ -111,7 +111,7 @@ export default function Customer() {
   // Search Filter
   // ===============================
   const filteredCustomers = [...customers].reverse().filter((item) => {
-    const term = searchTerm.toLowerCase().trim();
+    const term = searchTerm.toLowerCase();
 
     if (!term) return true;
 
