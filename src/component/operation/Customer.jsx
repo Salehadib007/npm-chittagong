@@ -111,12 +111,23 @@ export default function Customer() {
   // Search Filter
   // ===============================
   const filteredCustomers = [...customers].reverse().filter((item) => {
-    const term = searchTerm.toLowerCase();
+    const term = searchTerm.toLowerCase().trim();
+
+    if (!term) return true;
 
     return (
       item.pno?.toLowerCase().includes(term) ||
+      item.officialRank?.toLowerCase().includes(term) ||
+      item.brNoOrNid?.toLowerCase().includes(term) ||
+      item.fullName?.toLowerCase().includes(term) ||
+      item.primaryMobile?.toLowerCase().includes(term) ||
       item.registrationNo?.toLowerCase().includes(term) ||
-      item.sticker?.toLowerCase().includes(term)
+      item.chassisNumber?.toLowerCase().includes(term) ||
+      item.engineNumber?.toLowerCase().includes(term) ||
+      item.sticker?.toLowerCase().includes(term) ||
+      item.driverName?.toLowerCase().includes(term) ||
+      item.driverNidNo?.toLowerCase().includes(term) ||
+      item.drivingLicenseNo?.toLowerCase().includes(term)
     );
   });
   // ===============================
