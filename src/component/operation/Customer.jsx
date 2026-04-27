@@ -12,6 +12,19 @@ export default function Customer() {
   const [customers, setCustomers] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const officerRanks = [
+    "Admiral",
+    "Vice Admiral",
+    "Rear Admiral",
+    "Commodore",
+    "Captain",
+    "Commander",
+    "Lieutenant Commander",
+    "Sub Lieutenant",
+    "Acting Sub Lieutenant",
+    "Midshipman",
+  ];
+
   // ===============================
   // Search State
   // ===============================
@@ -306,7 +319,11 @@ export default function Customer() {
                       </td>
 
                       <td className="px-4 py-3 text-gray-700 font-medium">
-                        {`${item.officialRank} ${item.fullName}`}
+                        {
+                          officerRanks.includes(item.officialRank)
+                            ? `${item.officialRank} ${item.fullName}` // Rank before name
+                            : `${item.fullName} ${item.officialRank}` // Rank after name
+                        }
                       </td>
 
                       <td className="px-4 py-3 text-gray-600">
