@@ -59,7 +59,7 @@ const VehiclePass = () => {
             <span className="font-semibold">Rank:</span>
             <span>{user.officialRank}</span>
 
-            <span className="font-semibold">P No:</span>
+            <span className="font-semibold">P No/ Office No:</span>
             <span>{user.pno}</span>
 
             <span className="font-semibold">Blood Group:</span>

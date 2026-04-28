@@ -52,7 +52,7 @@ export default function PersonnelVehicleTable({ items }) {
           <table className="w-full text-sm border border-gray-300">
             <thead className="bg-slate-800 text-white print:bg-gray-200 print:text-black">
               <tr>
-                <th className="px-4 py-3 border text-left">PNO</th>
+                <th className="px-4 py-3 border text-left">PNO / Office No</th>
                 <th className="px-4 py-3 border text-left">Name</th>
                 <th className="px-4 py-3 border text-left">Rank</th>
                 <th className="px-4 py-3 border text-left">Type</th>

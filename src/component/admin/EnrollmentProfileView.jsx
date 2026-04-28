@@ -86,7 +86,7 @@ const EnrollmentProfileView = () => {
           </div>
 
           <div className="text-center md:text-right">
-            <p className="text-sm text-gray-500">PNO</p>
+            <p className="text-sm text-gray-500">PNO / Office No</p>
             <p className="text-xl font-bold">{item.pno}</p>
           </div>
         </div>

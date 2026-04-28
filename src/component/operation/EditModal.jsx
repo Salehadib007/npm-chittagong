@@ -109,7 +109,7 @@
 //               </h3>
 //               <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
 //                 <Input
-//                   label="* PNO"
+//                   label="* PNO / Office No"
 //                   name="pno"
 //                   value={enrollmentInfo.pno}
 //                   onChange={handleChange}
@@ -681,7 +681,7 @@ export default function EditModal({
 
               <div className="grid md:grid-cols-3 gap-2">
                 <Input
-                  label="PNO"
+                  label="PNO / Office No"
                   name="pno"
                   value={enrollmentInfo.pno}
                   onChange={handleChange}

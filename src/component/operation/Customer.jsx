@@ -223,7 +223,7 @@ export default function Customer() {
             {/* Search Bar */}
             <input
               type="text"
-              placeholder="Search by PNO, Registration No, or Sticker..."
+              placeholder="Search by PNO / ONO, Registration No, or Sticker..."
               value={searchTerm}
               onChange={(e) => {
                 setSearchTerm(e.target.value);
@@ -272,7 +272,7 @@ export default function Customer() {
                     </th>
                     <th className="px-4 py-3 text-center">#</th>
                     <th className="px-4 py-3 text-center">Profile</th>
-                    <th className="px-4 py-3 text-left">PNO</th>
+                    <th className="px-4 py-3 text-left">PNO / Office No</th>
                     <th className="px-4 py-3 text-left">Rank & Full Name</th>
                     <th className="px-4 py-3 text-left">Mobile</th>
                     <th className="px-4 py-3 text-left">NID</th>

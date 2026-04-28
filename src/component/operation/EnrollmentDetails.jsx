@@ -325,7 +325,7 @@ export default function EnrollmentDetails() {
           <div className="grid grid-cols-1 gap-4 xl:grid-cols-[500px_620px_240px]">
             {/* LEFT */}
             <div className="space-y-[10px]">
-              <Field label="PNO" value={enrollment.pno} />
+              <Field label="PNO / Office No" value={enrollment.pno} />
               <Field label="Official Rank" value={enrollment.officialRank} />
               <Field label="NID" value={enrollment.brNoOrNid} />
               <SelectField
