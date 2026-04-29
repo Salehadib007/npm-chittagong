@@ -200,7 +200,7 @@ export default function CustomerEntry() {
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-2">
               <Input
-                label="* PNO / Office No"
+                label="* PNO / Official No"
                 name="pno"
                 value={enrollment.pno}
                 onChange={handleChange}

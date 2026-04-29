@@ -272,7 +272,7 @@ export default function Customer() {
                     </th>
                     <th className="px-4 py-3 text-center">#</th>
                     <th className="px-4 py-3 text-center">Profile</th>
-                    <th className="px-4 py-3 text-left">PNO / Office No</th>
+                    <th className="px-4 py-3 text-left">PNO / Official No</th>
                     <th className="px-4 py-3 text-left">Rank & Full Name</th>
                     <th className="px-4 py-3 text-left">Mobile</th>
                     <th className="px-4 py-3 text-left">NID</th>
