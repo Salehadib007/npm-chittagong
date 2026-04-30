@@ -359,7 +359,8 @@ export default function Customer() {
                       </td>
 
                       <td className="px-4 py-3 text-gray-600">
-                        <CreatedBy createdBy={item.createdBy} />
+                        Superuser
+                        {/* <CreatedBy createdBy={item.createdBy} /> */}
                       </td>
 
                       <td className="px-4 py-3">
