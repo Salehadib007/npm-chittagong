@@ -362,12 +362,12 @@ export default function Register() {
           <table className="min-w-full text-sm">
             <thead className="bg-slate-800 text-white">
               <tr>
-                <th className="p-3 text-left">SL</th>
-                <th>Username</th>
-                <th>Designation</th>
-                <th>Department</th>
-                <th>Employee</th>
-                <th>Status</th>
+                <th className="p-3 text-left">Ser No</th>
+                <th className="p-3 pl-0 text-left">Username</th>
+                <th className="p-3 pl-0 text-left">Designation</th>
+                <th className="p-3 pl-0 text-left">Department</th>
+                <th className="p-3 pl-0 text-left">Employee</th>
+                <th className="p-3 pl-1 text-left">Status</th>
                 <th className="text-center">Options</th>
               </tr>
             </thead>

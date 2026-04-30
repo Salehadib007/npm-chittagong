@@ -110,12 +110,19 @@ export default function Customer() {
   // ===============================
   // Search Filter
   // ===============================
-  const filteredCustomers = [...customers].reverse().filter((item) => {
+  const filteredCustomers = [...customers].reverse().filter((item, index) => {
     const term = searchTerm.toLowerCase();
 
     if (!term) return true;
 
+    // Generate serial exactly same way as UI
+    const serial =
+      String(index + 1).padStart(4, "0") +
+      "/" +
+      new Date().getFullYear().toString().slice(-2);
+
     return (
+      serial.toLowerCase().includes(term) ||
       item.pno?.toLowerCase().includes(term) ||
       item.officialRank?.toLowerCase().includes(term) ||
       item.brNoOrNid?.toLowerCase().includes(term) ||

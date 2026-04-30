@@ -224,9 +224,9 @@ export default function Users() {
       <div style={card}>
         <div style={{ overflowX: "auto" }}>
           <table style={table}>
-            <thead>
+            <thead className=" items-start">
               <tr>
-                <th style={th}>#</th>
+                <th style={th}>Ser No</th>
                 <th style={th}>Username</th>
                 <th style={th}>Employee</th>
                 <th style={th}>Department</th>
@@ -580,7 +580,7 @@ const table = {
 };
 
 const th = {
-  padding: "12px 10px",
+  padding: "0px 10px",
   textAlign: "left",
   fontSize: 13,
   color: "#475569",
@@ -589,7 +589,7 @@ const th = {
 };
 
 const td = {
-  padding: "12px 10px",
+  padding: "0px 10px",
   fontSize: 14,
   color: "#0f172a",
   verticalAlign: "top",
