@@ -122,7 +122,8 @@ export default function Customer() {
       new Date().getFullYear().toString().slice(-2);
 
     return (
-      serial.toLowerCase().includes(term) ||
+      // serial.toLowerCase().includes(term) ||
+      item.enrollmentId?.toLowerCase().includes(term) ||
       item.pno?.toLowerCase().includes(term) ||
       item.officialRank?.toLowerCase().includes(term) ||
       item.brNoOrNid?.toLowerCase().includes(term) ||
@@ -315,10 +316,10 @@ export default function Customer() {
                       </td>
 
                       <td className="px-4 py-3 text-center font-medium text-gray-600">
-                        {/* {startIndex + idx + 1} */}
-                        {String(startIndex + idx + 1).padStart(4, "0") +
+                        {/* {String(startIndex + idx + 1).padStart(4, "0") +
                           "/" +
-                          new Date().getFullYear().toString().slice(-2)}
+                          new Date().getFullYear().toString().slice(-2)} */}
+                        {item.enrollmentId || "N/A"}
                       </td>
 
                       <td className="px-4 py-3 text-center">
