@@ -90,12 +90,10 @@ const AutoQRCode = () => {
                     <QRImage value={qrLink} />
                   </div>
 
-                  <div className="qr-serial">
-                    {item.serial}/{year}
-                  </div>
+                  <div className="qr-serial">{item.enrollmentId}</div>
                 </div>
 
-                <div className="qr-bottom">
+                <div className="qr-bottom font-bold">
                   <div className="qr-row">
                     <b>REG NO:</b> {item.registrationNo}
                   </div>
