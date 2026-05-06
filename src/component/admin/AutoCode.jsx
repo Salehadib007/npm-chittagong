@@ -93,13 +93,13 @@ const AutoQRCode = () => {
                   <div className="qr-serial">{item.enrollmentId}</div>
                 </div>
 
-                <div className="qr-bottom font-bold">
+                <div className="qr-bottom font-black">
                   <div className="qr-row">
-                    <b>REG NO:</b> {item.registrationNo}
+                    <b>REG NO: {item.registrationNo}</b>
                   </div>
 
                   <div className="qr-row">
-                    <b>ISSUE DATE:</b> {formatDate(item.issueDate)}
+                    <b>ISSUE DATE: {formatDate(item.issueDate)}</b>
                   </div>
 
                   <div className="qr-row">
@@ -213,7 +213,7 @@ const AutoQRCode = () => {
         .qr-row{
           font-size:12px;
           line-height:1.1;
-          letter-spacing:1px;
+          letter-spacing:0.7px;
           white-space:nowrap;
         }
 
