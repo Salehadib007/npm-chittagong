@@ -303,7 +303,7 @@ const AutoQRCode = () => {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 12pt !important;
+    font-size: 9pt !important;
     font-weight: 900;
     text-align: center;
     padding: 0 1mm;
