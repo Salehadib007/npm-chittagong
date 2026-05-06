@@ -228,6 +228,11 @@ const AutoQRCode = () => {
     background: #fff !important;
   }
 
+  body {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
   body * {
     visibility: hidden !important;
   }
@@ -249,47 +254,48 @@ const AutoQRCode = () => {
     display: none !important;
   }
 
+  /* 🔥 VERY SMALL PAGE MARGIN */
   @page {
     size: A4 portrait;
-    margin: 5mm;
+    margin: 2mm; /* reduced from 5mm */
   }
 
-  /* GRID */
+  /* GRID (fit more precisely) */
   .qr-grid {
     display: grid !important;
-    grid-template-columns: repeat(4, 4.2cm);
-    gap: 3mm;
+    grid-template-columns: repeat(4, 4.3cm);
+    gap: 4mm;
     justify-content: center;
   }
 
-  /* CARD */
+  /* 🔥 STRICT CARD SIZE */
   .qr-card {
-    width: 4.2cm !important;
-    height: 3cm !important;
-    border: 1mm solid #000 !important;
+    width: 4.3cm !important;
+    height: 3.2cm !important;
+    border: 0.8mm solid #000 !important;
     break-inside: avoid;
     page-break-inside: avoid;
-    overflow: hidden; /* 🔥 prevents spill */
+    overflow: hidden;
   }
 
   /* TOP */
   .qr-top {
     display: flex;
-    height: 1.8cm !important;
+    height: 1.9cm !important;
   }
 
   .qr-image {
-    width: 1.8cm !important;
-    height: 1.8cm !important;
-    border-right: 1mm solid #000 !important;
+    width: 1.9cm !important;
+    height: 1.9cm !important;
+    border-right: 0.8mm solid #000 !important;
     display: flex;
     justify-content: center;
     align-items: center;
   }
 
   .qr-image img {
-    width: 1.62cm !important;
-    height: 1.65cm !important;
+    width: 1.7cm !important;
+    height: 1.8cm !important;
   }
 
   .qr-serial {
@@ -297,7 +303,7 @@ const AutoQRCode = () => {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 10pt !important;
+    font-size: 12pt !important;
     font-weight: 900;
     text-align: center;
     padding: 0 1mm;
@@ -305,26 +311,25 @@ const AutoQRCode = () => {
 
   /* BOTTOM */
   .qr-bottom {
-    height: 1.2cm !important;
-    border-top: 1mm solid #000 !important;
-    padding: 0.5mm 1.5mm !important;
+    height: 1.3cm !important;
+    border-top: 0.8mm solid #000 !important;
+    padding: 0.5mm 1mm !important;
   }
 
   .qr-row {
-    font-size: 7pt !important;
-    line-height: 1.1 !important;
-    letter-spacing: 0.3px;
+    font-size: 7.6pt !important;
+    line-height: 1.2 !important;
+    letter-spacing: 0.1px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    font-weight: 900
+    font-weight: 900;
   }
 
   .qr-row b,
   .qr-row strong {
-    font-weight: 900; /* preserve bold */
+    font-weight: 900;
   }
-
 }
       `}</style>
     </div>
