@@ -231,86 +231,56 @@ const AutoQRCode = () => {
         }
 
         /* PRINT FIXED */
-        @media print{
+       @media print {
 
-          body *{
-            visibility:hidden !important;
-          }
+  html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #fff !important;
+  }
 
-          .qr-wrapper,
-          .qr-wrapper *{
-            visibility:visible !important;
-          }
+  body * {
+    visibility: hidden !important;
+  }
 
-          .qr-wrapper{
-            position:absolute;
-            left:0;
-            top:0;
-            width:100%;
-            padding:0;
-          }
+  .qr-wrapper,
+  .qr-wrapper * {
+    visibility: visible !important;
+  }
 
-          .print-hide{
-            display:none !important;
-          }
+  .qr-wrapper {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    padding: 0;
+  }
 
-          @page{
-            size:A4 portrait;
-            margin:5mm;
-          }
+  .print-hide {
+    display: none !important;
+  }
 
-          /* Use GRID instead of flex for reliable printing */
-          .qr-grid{
-            display:grid !important;
-            grid-template-columns:
-              repeat(4,4.2cm);
-            gap:3mm;
-            justify-content:center;
-          }
+  /* A4 page */
+  @page {
+    size: A4 portrait;
+    margin: 5mm;
+  }
 
-          .qr-card{
-            width:4.2cm !important;
-            height:3cm !important;
-            border:1mm solid #000 !important;
-            break-inside:avoid;
-            page-break-inside:avoid;
-          }
+  /* 🔥 KEY: KEEP SAME GRID */
+  .qr-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, 200px) !important;
+    gap: 8px !important;
+    justify-content: center;
+  }
 
-          .qr-top{
-            height:1.9cm !important;
-          }
+  /* 🔥 SCALE INSTEAD OF REBUILDING */
+  .qr-wrapper {
+    transform: scale(0.8);
+    transform-origin: top center;
+  }
 
-          .qr-image{
-            width:1.8cm !important;
-            height:1.9cm !important;
-            border-right:1mm solid #000 !important;
-          }
-
-          .qr-image img{
-            width:1.9cm !important;
-            height:1.82cm !important;
-          }
-
-          .qr-serial{
-            width:2.4cm !important;
-            font-size:10pt !important;
-          }
-
-          .qr-bottom{
-            height:1.2cm !important;
-            border-top:1mm solid #000 !important;
-            padding:.5mm 2mm !important;
-          }
-
-          .qr-row{
-            font-size:6.7pt !important;
-            line-height:1.1 !important;
-            letter-spacing:1px;
-            margin-left:-1mm;
-          }
-
-        }
-
+}
       `}</style>
     </div>
   );
