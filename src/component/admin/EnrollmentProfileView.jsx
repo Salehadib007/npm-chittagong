@@ -96,12 +96,12 @@ const EnrollmentProfileView = () => {
           <Field label="Full Name" value={item.fullName} />
           <Field label="Rank" value={item.officialRank} />
           <Field label="Email" value={item.email} />
-          <Field label="Blood Group" value={item.bloodGroup} />
-          <Field label="NID / BR No" value={item.brNoOrNid} />
+          {/* <Field label="Blood Group" value={item.bloodGroup} /> */}
+          {/* <Field label="NID / BR No" value={item.brNoOrNid} /> */}
           <Field label="Mobile" value={item.primaryMobile} />
           <Field label="Alternative Mobile" value={item.alternativeMobile} />
           <Field label="Category" value={item.userCategory} />
-          <Field label="Permanent Address" value={item.permanentAddress} />
+          {/* <Field label="Permanent Address" value={item.permanentAddress} /> */}
           <Field label="Job Location" value={item.jobLocation} />
         </Section>
 
@@ -111,7 +111,7 @@ const EnrollmentProfileView = () => {
           <Field label="Brand" value={item.vehicleBrand} />
           <Field label="Model" value={item.vehicleModel} />
           <Field label="Registration No" value={item.registrationNo} />
-          <Field label="Registration Info" value={item.registrationInfo} />
+          {/* <Field label="Registration Info" value={item.registrationInfo} /> */}
           <Field label="Chassis Number" value={item.chassisNumber} />
           <Field label="Engine Number" value={item.engineNumber} />
           <Field label="Driving Type" value={item.drivingType} />
@@ -120,7 +120,7 @@ const EnrollmentProfileView = () => {
         {/* DRIVER INFO */}
         <Section title="Driver Information">
           <Field label="Driver Name" value={item.driverName} />
-          <Field label="NID No" value={item.driverNidNo} />
+          {/* <Field label="NID No" value={item.driverNidNo} /> */}
           <Field label="License No" value={item.drivingLicenseNo} />
           <Field
             label="License Expire"
@@ -137,7 +137,7 @@ const EnrollmentProfileView = () => {
         </Section>
 
         {/* IMAGES */}
-        <Section title="Documents & Images">
+        {/* <Section title="Documents & Images">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             <ImageBox label="Profile" src={item.profileImage} />
             <ImageBox label="Driver" src={item.driverImage} />
@@ -145,7 +145,7 @@ const EnrollmentProfileView = () => {
             <ImageBox label="Fitness" src={item.fitnessImage} />
             <ImageBox label="Sticker" src={item.stickerImage} />
           </div>
-        </Section>
+        </Section> */}
 
         {/* FOOTER */}
         <div className="text-center text-sm text-gray-400 mt-6">
