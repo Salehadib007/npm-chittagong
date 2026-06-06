@@ -95,11 +95,11 @@ const EnrollmentProfileView = () => {
         <Section title="Personal Information">
           <Field label="Full Name" value={item.fullName} />
           <Field label="Rank" value={item.officialRank} />
-          <Field label="Email" value={item.email} />
+          {/* <Field label="Email" value={item.email} /> */}
           {/* <Field label="Blood Group" value={item.bloodGroup} /> */}
           {/* <Field label="NID / BR No" value={item.brNoOrNid} /> */}
           <Field label="Mobile" value={item.primaryMobile} />
-          <Field label="Alternative Mobile" value={item.alternativeMobile} />
+          {/* <Field label="Alternative Mobile" value={item.alternativeMobile} /> */}
           <Field label="Category" value={item.userCategory} />
           {/* <Field label="Permanent Address" value={item.permanentAddress} /> */}
           <Field label="Job Location" value={item.jobLocation} />
@@ -108,13 +108,13 @@ const EnrollmentProfileView = () => {
         {/* VEHICLE INFO */}
         <Section title="Vehicle Information">
           <Field label="Vehicle Type" value={item.vehicleType} />
-          <Field label="Brand" value={item.vehicleBrand} />
-          <Field label="Model" value={item.vehicleModel} />
+          {/* <Field label="Brand" value={item.vehicleBrand} />
+          <Field label="Model" value={item.vehicleModel} /> */}
           <Field label="Registration No" value={item.registrationNo} />
           {/* <Field label="Registration Info" value={item.registrationInfo} /> */}
-          <Field label="Chassis Number" value={item.chassisNumber} />
+          {/* <Field label="Chassis Number" value={item.chassisNumber} />
           <Field label="Engine Number" value={item.engineNumber} />
-          <Field label="Driving Type" value={item.drivingType} />
+          <Field label="Driving Type" value={item.drivingType} /> */}
         </Section>
 
         {/* DRIVER INFO */}
