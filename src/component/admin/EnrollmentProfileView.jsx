@@ -79,7 +79,7 @@ const EnrollmentProfileView = () => {
           </div>
 
           {/* PROFILE */}
-          <div className="flex justify-center -mt-12">
+          <div className="flex justify-center -mt-5">
             <img
               src={item.profileImage}
               alt="profile"
