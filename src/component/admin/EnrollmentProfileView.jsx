@@ -3,30 +3,30 @@ import { useParams } from "react-router-dom";
 import api from "../../../utils/api";
 import { formatDate } from "../../../utils/formatDate";
 
-const Field = ({ label, value }) => (
-  <div className="flex justify-between gap-4 py-2 border-b">
-    <span className="text-gray-500 font-medium">{label}</span>
-    <span className="font-semibold text-right">{value || "-"}</span>
-  </div>
-);
+// const Field = ({ label, value }) => (
+//   <div className="flex justify-between gap-4 py-2 border-b">
+//     <span className="text-gray-500 font-medium">{label}</span>
+//     <span className="font-semibold text-right">{value || "-"}</span>
+//   </div>
+// );
 
-const Section = ({ title, children }) => (
-  <div className="bg-white shadow-md rounded-2xl p-5 mb-6 border">
-    <h2 className="text-lg font-bold mb-3 border-b pb-2">{title}</h2>
-    {children}
-  </div>
-);
+// const Section = ({ title, children }) => (
+//   <div className="bg-white shadow-md rounded-2xl p-5 mb-6 border">
+//     <h2 className="text-lg font-bold mb-3 border-b pb-2">{title}</h2>
+//     {children}
+//   </div>
+// );
 
-const ImageBox = ({ label, src }) => (
-  <div className="flex flex-col items-center gap-2">
-    <p className="text-sm text-gray-500">{label}</p>
-    <img
-      src={src}
-      alt={label}
-      className="w-32 h-32 object-cover rounded-xl border"
-    />
-  </div>
-);
+// const ImageBox = ({ label, src }) => (
+//   <div className="flex flex-col items-center gap-2">
+//     <p className="text-sm text-gray-500">{label}</p>
+//     <img
+//       src={src}
+//       alt={label}
+//       className="w-32 h-32 object-cover rounded-xl border"
+//     />
+//   </div>
+// );
 
 const EnrollmentProfileView = () => {
   const { enrollmentId } = useParams();
@@ -66,94 +66,200 @@ const EnrollmentProfileView = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 p-4 md:p-10">
-      <div className="max-w-5xl mx-auto">
-        {/* HEADER CARD */}
-        <div className="bg-white shadow-xl rounded-2xl p-6 mb-6 flex flex-col md:flex-row gap-6 items-center">
+    <div className="min-h-screen bg-[#efefef] py-10 px-4">
+      <div className="max-w-md mx-auto">
+        {/* PRINT STYLES */}
+        <style>
+          {`
+          @media print {
+            .no-print {
+              display: none !important;
+            }
+
+            body {
+              background: white !important;
+            }
+          }
+        `}
+        </style>
+
+        {/* Profile */}
+        <div className="flex justify-center mb-8">
           <img
             src={item.profileImage}
             alt="profile"
-            className="w-32 h-32 rounded-full object-cover border-4 border-gray-200"
+            className="w-36 h-36 rounded-full object-cover border-4 border-white shadow-lg"
           />
-
-          <div className="flex-1 text-center md:text-left">
-            <h1 className="text-2xl font-bold">{item.fullName}</h1>
-            <p className="text-gray-500">{item.officialRank}</p>
-            <p className="text-sm text-gray-400 mt-1">
-              Enrollment ID:{" "}
-              <span className="font-semibold">{item.enrollmentId}</span>
-            </p>
-          </div>
-
-          <div className="text-center md:text-right">
-            <p className="text-sm text-gray-500">PNO / Official No</p>
-            <p className="text-xl font-bold">{item.pno}</p>
-          </div>
         </div>
 
-        {/* PERSONAL INFO */}
-        <Section title="Personal Information">
-          <Field label="Full Name" value={item.fullName} />
-          <Field label="Rank" value={item.officialRank} />
-          {/* <Field label="Email" value={item.email} /> */}
-          {/* <Field label="Blood Group" value={item.bloodGroup} /> */}
-          {/* <Field label="NID / BR No" value={item.brNoOrNid} /> */}
-          <Field label="Mobile" value={item.primaryMobile} />
-          {/* <Field label="Alternative Mobile" value={item.alternativeMobile} /> */}
-          <Field label="Category" value={item.userCategory} />
-          {/* <Field label="Permanent Address" value={item.permanentAddress} /> */}
-          <Field label="Job Location" value={item.jobLocation} />
-        </Section>
+        {/* Information */}
+        <div className="text-black text-[18px] md:text-[22px] leading-relaxed font-medium">
+          <p>
+            Serial:
+            {item.enrollmentId}
+          </p>
 
-        {/* VEHICLE INFO */}
-        <Section title="Vehicle Information">
-          <Field label="Vehicle Type" value={item.vehicleType} />
-          {/* <Field label="Brand" value={item.vehicleBrand} />
-          <Field label="Model" value={item.vehicleModel} /> */}
-          <Field label="Registration No" value={item.registrationNo} />
-          {/* <Field label="Registration Info" value={item.registrationInfo} /> */}
-          {/* <Field label="Chassis Number" value={item.chassisNumber} />
-          <Field label="Engine Number" value={item.engineNumber} />
-          <Field label="Driving Type" value={item.drivingType} /> */}
-        </Section>
+          <p>
+            Name and Rank:
+            {item.officialRank} {item.fullName}
+          </p>
 
-        {/* DRIVER INFO */}
-        <Section title="Driver Information">
-          <Field label="Driver Name" value={item.driverName} />
-          {/* <Field label="NID No" value={item.driverNidNo} /> */}
-          <Field label="License No" value={item.drivingLicenseNo} />
-          <Field
-            label="License Expire"
-            value={formatDate(item.licenseExpireDate)}
-          />
-        </Section>
+          <p>
+            O No:
+            {item.pno}
+          </p>
 
-        {/* IMPORTANT DATES */}
-        <Section title="Validity & Dates">
-          <Field label="Issue Date" value={formatDate(item.issueDate)} />
-          <Field label="Validity" value={formatDate(item.validity)} />
-          <Field label="Fitness" value={formatDate(item.fitness)} />
-          <Field label="Tax Token" value={formatDate(item.taxToken)} />
-        </Section>
+          <p>
+            Tax:
+            {formatDate(item.taxToken)}
+          </p>
 
-        {/* IMAGES */}
-        {/* <Section title="Documents & Images">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <ImageBox label="Profile" src={item.profileImage} />
-            <ImageBox label="Driver" src={item.driverImage} />
-            <ImageBox label="Tax Token" src={item.taxTokenImage} />
-            <ImageBox label="Fitness" src={item.fitnessImage} />
-            <ImageBox label="Sticker" src={item.stickerImage} />
-          </div>
-        </Section> */}
+          <p>
+            Reg No:
+            {item.registrationNo}
+          </p>
 
-        {/* FOOTER */}
-        <div className="text-center text-sm text-gray-400 mt-6">
-          Last updated: {formatDate(item.updatedAt)}
+          <p>
+            Issue:
+            {formatDate(item.issueDate)}
+          </p>
+
+          <p>
+            Fitness:
+            {formatDate(item.fitness)}
+          </p>
+
+          <p>
+            Validity:
+            {formatDate(item.validity)}
+          </p>
+
+          <p>
+            Mobile:
+            {item.primaryMobile}
+          </p>
         </div>
+
+        {/* Copy Button */}
+        <div className="flex justify-center mt-12 no-print">
+          <button
+            onClick={() => {
+              const text = `
+Serial:${item.enrollmentId}
+Name and Rank:${item.officialRank} ${item.fullName}
+O No:${item.pno}
+Tax:${formatDate(item.taxToken)}
+Reg No:${item.registrationNo}
+Issue:${formatDate(item.issueDate)}
+Fitness:${formatDate(item.fitness)}
+Validity:${formatDate(item.validity)}
+Mobile:${item.primaryMobile}
+`;
+
+              navigator.clipboard.writeText(text);
+
+              alert("Copied Successfully");
+            }}
+            className="bg-blue-500 hover:bg-blue-600 text-white font-bold text-2xl px-20 py-5 rounded-full shadow-lg transition"
+          >
+            Copy
+          </button>
+        </div>
+
+        {/* Last Updated */}
+        {/* <div className="text-center text-sm text-gray-400 mt-6">
+        Last updated: {formatDate(item.updatedAt)}
+      </div> */}
       </div>
     </div>
   );
+  // <div className="min-h-screen bg-gray-100 p-4 md:p-10">
+  //   <div className="max-w-5xl mx-auto">
+  //     {/* HEADER CARD */}
+  //     <div className="bg-white shadow-xl rounded-2xl p-6 mb-6 flex flex-col md:flex-row gap-6 items-center">
+  //       <img
+  //         src={item.profileImage}
+  //         alt="profile"
+  //         className="w-32 h-32 rounded-full object-cover border-4 border-gray-200"
+  //       />
+
+  //       <div className="flex-1 text-center md:text-left">
+  //         <h1 className="text-2xl font-bold">{item.fullName}</h1>
+  //         <p className="text-gray-500">{item.officialRank}</p>
+  //         <p className="text-sm text-gray-400 mt-1">
+  //           Enrollment ID:{" "}
+  //           <span className="font-semibold">{item.enrollmentId}</span>
+  //         </p>
+  //       </div>
+
+  //       <div className="text-center md:text-right">
+  //         <p className="text-sm text-gray-500">PNO / Official No</p>
+  //         <p className="text-xl font-bold">{item.pno}</p>
+  //       </div>
+  //     </div>
+
+  //     {/* PERSONAL INFO */}
+  //     <Section title="Personal Information">
+  //       <Field label="Full Name" value={item.fullName} />
+  //       <Field label="Rank" value={item.officialRank} />
+  //       {/* <Field label="Email" value={item.email} /> */}
+  //       {/* <Field label="Blood Group" value={item.bloodGroup} /> */}
+  //       {/* <Field label="NID / BR No" value={item.brNoOrNid} /> */}
+  //       <Field label="Mobile" value={item.primaryMobile} />
+  //       {/* <Field label="Alternative Mobile" value={item.alternativeMobile} /> */}
+  //       <Field label="Category" value={item.userCategory} />
+  //       {/* <Field label="Permanent Address" value={item.permanentAddress} /> */}
+  //       <Field label="Job Location" value={item.jobLocation} />
+  //     </Section>
+
+  //     {/* VEHICLE INFO */}
+  //     <Section title="Vehicle Information">
+  //       <Field label="Vehicle Type" value={item.vehicleType} />
+  //       {/* <Field label="Brand" value={item.vehicleBrand} />
+  //       <Field label="Model" value={item.vehicleModel} /> */}
+  //       <Field label="Registration No" value={item.registrationNo} />
+  //       {/* <Field label="Registration Info" value={item.registrationInfo} /> */}
+  //       {/* <Field label="Chassis Number" value={item.chassisNumber} />
+  //       <Field label="Engine Number" value={item.engineNumber} />
+  //       <Field label="Driving Type" value={item.drivingType} /> */}
+  //     </Section>
+
+  //     {/* DRIVER INFO */}
+  //     <Section title="Driver Information">
+  //       <Field label="Driver Name" value={item.driverName} />
+  //       {/* <Field label="NID No" value={item.driverNidNo} /> */}
+  //       <Field label="License No" value={item.drivingLicenseNo} />
+  //       <Field
+  //         label="License Expire"
+  //         value={formatDate(item.licenseExpireDate)}
+  //       />
+  //     </Section>
+
+  //     {/* IMPORTANT DATES */}
+  //     <Section title="Validity & Dates">
+  //       <Field label="Issue Date" value={formatDate(item.issueDate)} />
+  //       <Field label="Validity" value={formatDate(item.validity)} />
+  //       <Field label="Fitness" value={formatDate(item.fitness)} />
+  //       <Field label="Tax Token" value={formatDate(item.taxToken)} />
+  //     </Section>
+
+  //     {/* IMAGES */}
+  //     {/* <Section title="Documents & Images">
+  //       <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+  //         <ImageBox label="Profile" src={item.profileImage} />
+  //         <ImageBox label="Driver" src={item.driverImage} />
+  //         <ImageBox label="Tax Token" src={item.taxTokenImage} />
+  //         <ImageBox label="Fitness" src={item.fitnessImage} />
+  //         <ImageBox label="Sticker" src={item.stickerImage} />
+  //       </div>
+  //     </Section> */}
+
+  //     {/* FOOTER */}
+  //     <div className="text-center text-sm text-gray-400 mt-6">
+  //       Last updated: {formatDate(item.updatedAt)}
+  //     </div>
+  //   </div>
+  // </div>
 };
 
 export default EnrollmentProfileView;
