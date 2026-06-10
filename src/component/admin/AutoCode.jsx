@@ -62,276 +62,146 @@ const AutoQRCode = () => {
   }
 
   return (
-    <div className="qr-wrapper">
-      {loading ? (
-        <div className="loading-container">
-          <p>Generating QR Codes...</p>
-          <div className="loader" />
-        </div>
-      ) : (
-        <div className="qr-grid">
-          {enrollments.map((item) => {
-            const qrLink = `https://npm-chittagong-nu.vercel.app/permit/${item._id}`;
+    <div className="min-h-screen bg-slate-100 py-8 px-4">
+      <style>
+        {`
+        @media print {
+          .no-print {
+            display: none !important;
+          }
 
-            return (
-              <div key={item._id} className="qr-card">
-                <div className="qr-top">
-                  <div className="qr-image">
-                    <QRImage value={qrLink} />
-                  </div>
+          body {
+            background: white !important;
+          }
 
-                  <div className="qr-serial">{item.enrollmentId}</div>
-                </div>
-
-                <div className="qr-bottom font-black">
-                  <div className="qr-row">
-                    <b>REG NO: {item.registrationNo}</b>
-                  </div>
-
-                  <div className="qr-row">
-                    <b>ISSUE DATE: {formatDate(item.issueDate)}</b>
-                  </div>
-
-                  <div className="qr-row">
-                    <b>VALIDITY:</b>{" "}
-                    <strong>{formatDate(item.validity)}</strong>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      )}
-
-      <div
-        className="print-hide"
-        style={{
-          marginTop: 16,
-          textAlign: "center",
-        }}
-      >
-        <button className="print-btn" onClick={() => window.print()}>
-          Print / Save as PDF
-        </button>
-      </div>
-
-      <style>{`
-        * {
-          box-sizing: border-box;
-        }
-
-        body {
-          margin: 0;
-          font-family: Arial, sans-serif;
-          background: #e8e8e8;
-        }
-
-        .qr-wrapper {
-          padding: 20px;
-        }
-
-        .loading-container {
-          margin-top: 40px;
-          text-align: center;
-        }
-
-        .loader {
-          width: 48px;
-          height: 48px;
-          margin: 12px auto;
-          border: 5px solid #ddd;
-          border-top-color: #444;
-          border-radius: 50%;
-          animation: spin 0.8s linear infinite;
-        }
-
-        @keyframes spin {
-          to {
-            transform: rotate(360deg);
+          .print-card {
+            box-shadow: none !important;
+            border: none !important;
           }
         }
+      `}
+      </style>
 
-        /* SCREEN */
-        .qr-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, 200px);
-          gap: 8px;
-          justify-content: center;
-        }
+      <div className="max-w-xl mx-auto">
+        <div className="print-card bg-white rounded-3xl shadow-xl overflow-hidden border border-slate-200">
+          {/* Header */}
+          <div className="bg-gradient-to-r from-slate-900 to-slate-700 px-6 py-8 text-center">
+            <h1 className="text-white text-xl md:text-2xl font-bold tracking-wide">
+              Vehicle Pass Information
+            </h1>
+            <p className="text-slate-300 text-sm mt-1">
+              Official Enrollment Record
+            </p>
+          </div>
 
-        .qr-card {
-          width: 200px;
-          border: 3.5px solid #000;
-          background: #fff;
-        }
+          {/* Profile */}
+          <div className="flex justify-center -mt-14">
+            <img
+              src={item.profileImage}
+              alt="Profile"
+              className="w-32 h-32 rounded-full border-4 border-white shadow-lg object-cover bg-white"
+            />
+          </div>
 
-        .qr-top {
-          display: flex;
-          height: 80px;
-        }
+          {/* Main Content */}
+          <div className="p-6 md:p-8">
+            <div className="space-y-1">
+              <div className="flex justify-between gap-4 py-3 border-b border-slate-200">
+                <span className="font-semibold text-slate-600">Serial</span>
+                <span className="font-bold text-right">
+                  {item.enrollmentId}
+                </span>
+              </div>
 
-        .qr-image {
-          width: 83px;
-          height: 80px;
-          border-right: 3.5px solid #000;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
+              <div className="flex justify-between gap-4 py-3 border-b border-slate-200">
+                <span className="font-semibold text-slate-600">
+                  Name & Rank
+                </span>
+                <span className="font-bold text-right">
+                  {item.officialRank} {item.fullName}
+                </span>
+              </div>
 
-        .qr-image img {
-          width: 73px !important;
-          height: 76px !important;
-          display: block;
-        }
+              <div className="flex justify-between gap-4 py-3 border-b border-slate-200">
+                <span className="font-semibold text-slate-600">O No</span>
+                <span className="font-bold text-right">{item.pno}</span>
+              </div>
 
-        .qr-serial {
-          flex: 1;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          font-size: 15px;
-          font-weight: 700;
-        }
+              <div className="flex justify-between gap-4 py-3 border-b border-slate-200">
+                <span className="font-semibold text-slate-600">Tax</span>
+                <span className="font-bold text-right">
+                  {formatDate(item.taxToken)}
+                </span>
+              </div>
 
-        .qr-bottom {
-          border-top: 3.5px solid #000;
-          padding: 3px 5px;
-        }
+              <div className="flex justify-between gap-4 py-3 border-b border-slate-200">
+                <span className="font-semibold text-slate-600">Reg No</span>
+                <span className="font-bold text-right">
+                  {item.registrationNo}
+                </span>
+              </div>
 
-        .qr-row {
-          font-size: 12px;
-          line-height: 1.1;
-          letter-spacing: 0.7px;
-          white-space: nowrap;
-        }
+              <div className="flex justify-between gap-4 py-3 border-b border-slate-200">
+                <span className="font-semibold text-slate-600">Issue</span>
+                <span className="font-bold text-right">
+                  {formatDate(item.issueDate)}
+                </span>
+              </div>
 
-        .print-btn {
-          padding: 9px 22px;
-          border: 2px solid #000;
-          background: #fff;
-          font-weight: 700;
-          cursor: pointer;
-        }
+              <div className="flex justify-between gap-4 py-3 border-b border-slate-200">
+                <span className="font-semibold text-slate-600">Fitness</span>
+                <span className="font-bold text-right">
+                  {formatDate(item.fitness)}
+                </span>
+              </div>
 
-        .print-btn:hover {
-          background: #000;
-          color: #fff;
-        }
+              <div className="flex justify-between gap-4 py-3 border-b border-slate-200">
+                <span className="font-semibold text-slate-600">Validity</span>
+                <span className="font-bold text-right text-green-700">
+                  {formatDate(item.validity)}
+                </span>
+              </div>
 
-        /* PRINT */
-@media print {
+              <div className="flex justify-between gap-4 py-3">
+                <span className="font-semibold text-slate-600">Mobile</span>
+                <span className="font-bold text-right">
+                  {item.primaryMobile}
+                </span>
+              </div>
+            </div>
 
-  html, body {
-    margin: 0 !important;
-    padding: 0 !important;
-    background: #fff !important;
-  }
+            {/* Copy Button */}
+            <button
+              onClick={() => {
+                const text = `
+Serial: ${item.enrollmentId}
+Name and Rank: ${item.officialRank} ${item.fullName}
+O No: ${item.pno}
+Tax: ${formatDate(item.taxToken)}
+Reg No: ${item.registrationNo}
+Issue: ${formatDate(item.issueDate)}
+Fitness: ${formatDate(item.fitness)}
+Validity: ${formatDate(item.validity)}
+Mobile: ${item.primaryMobile}
+              `.trim();
 
-  body {
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-  }
+                navigator.clipboard.writeText(text);
+              }}
+              className="no-print w-full mt-8 bg-blue-600 hover:bg-blue-700 text-white font-semibold text-lg py-4 rounded-2xl shadow-md transition-all duration-200"
+            >
+              Copy Information
+            </button>
 
-  body * {
-    visibility: hidden !important;
-  }
-
-  .qr-wrapper,
-  .qr-wrapper * {
-    visibility: visible !important;
-  }
-
-  .qr-wrapper {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    padding: 0;
-  }
-
-  .print-hide {
-    display: none !important;
-  }
-
-  /* 🔥 VERY SMALL PAGE MARGIN */
-  @page {
-    size: A4 portrait;
-    margin: 2mm; /* reduced from 5mm */
-  }
-
-  /* GRID (fit more precisely) */
-  .qr-grid {
-    display: grid !important;
-    grid-template-columns: repeat(4, 4.3cm);
-    gap: 4mm;
-    justify-content: center;
-  }
-
-  /* 🔥 STRICT CARD SIZE */
-  .qr-card {
-    width: 4.3cm !important;
-    height: 3.2cm !important;
-    border: 0.8mm solid #000 !important;
-    break-inside: avoid;
-    page-break-inside: avoid;
-    overflow: hidden;
-  }
-
-  /* TOP */
-  .qr-top {
-    display: flex;
-    height: 1.9cm !important;
-  }
-
-  .qr-image {
-    width: 1.9cm !important;
-    height: 1.9cm !important;
-    border-right: 0.8mm solid #000 !important;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .qr-image img {
-    width: 1.7cm !important;
-    height: 1.8cm !important;
-  }
-
-  .qr-serial {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 9pt !important;
-    font-weight: 900;
-    text-align: center;
-    padding: 0 1mm;
-  }
-
-  /* BOTTOM */
-  .qr-bottom {
-    height: 1.3cm !important;
-    border-top: 0.8mm solid #000 !important;
-    padding: 0.5mm 1mm !important;
-  }
-
-  .qr-row {
-    font-size: 7.6pt !important;
-    line-height: 1.2 !important;
-    letter-spacing: 0.1px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-weight: 900;
-  }
-
-  .qr-row b,
-  .qr-row strong {
-    font-weight: 900;
-  }
-}
-      `}</style>
+            {/* Print Button */}
+            <button
+              onClick={() => window.print()}
+              className="no-print w-full mt-3 bg-slate-800 hover:bg-gradient-to-r from-slate-900 to-slate-700 text-white font-semibold text-lg py-4 rounded-2xl shadow-md transition-all duration-200"
+            >
+              Print
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
