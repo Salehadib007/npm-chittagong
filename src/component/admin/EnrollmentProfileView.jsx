@@ -14,8 +14,8 @@ const EnrollmentProfileView = () => {
       try {
         const res = await api.get(`/enrollment/${enrollmentId}`);
         setItem(res.data);
-      } catch (err) {
-        console.error(err);
+      } catch (error) {
+        console.error(error);
       } finally {
         setLoading(false);
       }
@@ -40,94 +40,123 @@ const EnrollmentProfileView = () => {
     );
   }
 
-  const fields = [
-    ["Serial", item.enrollmentId],
-    ["Name & Rank", `${item.officialRank} ${item.fullName}`],
-    ["O No", item.pno],
-    ["Tax", formatDate(item.taxToken)],
-    ["Reg No", item.registrationNo],
-    ["Issue Date", formatDate(item.issueDate)],
-    ["Fitness", formatDate(item.fitness)],
-    ["Validity", formatDate(item.validity)],
-    ["Mobile", item.primaryMobile],
-  ];
+  const copyText = `
+Serial No : ${item.enrollmentId}
+Name & Rank : ${item.officialRank} ${item.fullName}
+P.NO / O.NO : ${item.pno}
+Billet : ${item.jobLocation || "-"}
+Vehicle Reg No : ${item.registrationNo}
+Vehicle Tax Token Validity : ${formatDate(item.taxToken)}
+Vehicle Fitness Validity : ${formatDate(item.fitness)}
+Sticker Issued : ${formatDate(item.issueDate)}
+Sticker Validity : ${formatDate(item.validity)}
+Mobile : ${item.primaryMobile}
+  `.trim();
 
   return (
     <div className="min-h-screen bg-slate-100 py-10 px-4">
-      {/* PRINT STYLE */}
       <style>
         {`
           @media print {
-            .no-print { display: none !important; }
-            body { background: white !important; }
-            .card { box-shadow: none !important; border: none !important; }
+            .no-print {
+              display: none !important;
+            }
+
+            body {
+              background: white !important;
+            }
+
+            .print-card {
+              box-shadow: none !important;
+              border: none !important;
+            }
           }
         `}
       </style>
 
-      <div className="max-w-2xl mx-auto space-y-6">
-        {/* CARD */}
-        <div className="card bg-white rounded-3xl shadow-xl border border-slate-200 overflow-hidden">
-          {/* HEADER */}
-          <div className="bg-gradient-to-r from-slate-900 to-slate-700 px-6 py-6 text-center">
-            <h1 className="text-white text-xl font-bold tracking-wide">
-              Vehicle Pass Information
-            </h1>
+      <div className="max-w-4xl mx-auto">
+        <div className="print-card bg-white rounded-2xl shadow-lg border border-slate-200 overflow-hidden">
+          {/* Header */}
+          <div className="bg-slate-900 text-white text-center py-5">
+            <h1 className="text-2xl font-bold">Confidential Information</h1>
             <p className="text-slate-300 text-sm mt-1">
-              Official Enrollment Record
+              Official Information Record
             </p>
           </div>
 
-          {/* PROFILE */}
-          <div className="flex justify-center -mt-5">
+          {/* Profile */}
+          <div className="flex justify-center pt-6">
             <img
               src={item.profileImage}
-              alt="profile"
-              className="w-28 h-28 rounded-full object-cover border-4 border-white shadow-lg bg-white"
+              alt="Profile"
+              className="w-32 h-32 rounded-full object-cover border-4 border-slate-200"
             />
           </div>
 
-          {/* CONTENT */}
-          <div className="p-6 md:p-8">
-            {/* INFO GRID */}
-            <div className="divide-y divide-slate-200">
-              {fields.map(([label, value], i) => (
-                <div key={i} className="flex justify-between gap-6 py-3">
-                  <span className="text-slate-500 font-medium">{label}</span>
+          {/* Content */}
+          <div className="p-8">
+            <div className="space-y-5 text-lg">
+              <div>
+                <span className="font-bold">Serial No :</span>{" "}
+                {item.enrollmentId}
+              </div>
 
-                  <span className="text-slate-900 font-semibold text-right break-words">
-                    {value || "-"}
-                  </span>
-                </div>
-              ))}
+              <div>
+                <span className="font-bold">Name & Rank :</span>{" "}
+                {item.officialRank} {item.fullName}
+              </div>
+
+              <div>
+                <span className="font-bold">P.NO / O.NO :</span> {item.pno}
+              </div>
+
+              <div>
+                <span className="font-bold">Billet :</span>{" "}
+                {item.jobLocation || "-"}
+              </div>
+
+              <div>
+                <span className="font-bold">Vehicle Reg No :</span>{" "}
+                {item.registrationNo}
+              </div>
+
+              <div>
+                <span className="font-bold">Vehicle Tax Token Validity :</span>{" "}
+                {formatDate(item.taxToken)}
+              </div>
+
+              <div>
+                <span className="font-bold">Vehicle Fitness Validity :</span>{" "}
+                {formatDate(item.fitness)}
+              </div>
+
+              <div>
+                <span className="font-bold">Sticker Issued :</span>{" "}
+                {formatDate(item.issueDate)}
+              </div>
+
+              <div>
+                <span className="font-bold">Sticker Validity :</span>{" "}
+                {formatDate(item.validity)}
+              </div>
+
+              <div>
+                <span className="font-bold">Mobile :</span> {item.primaryMobile}
+              </div>
             </div>
 
-            {/* ACTIONS */}
-            <div className="mt-8 space-y-3 no-print">
+            {/* Buttons */}
+            <div className="mt-10 space-y-3 no-print">
               <button
-                onClick={() => {
-                  const text = `
-Serial: ${item.enrollmentId}
-Name & Rank: ${item.officialRank} ${item.fullName}
-O No: ${item.pno}
-Tax: ${formatDate(item.taxToken)}
-Reg No: ${item.registrationNo}
-Issue: ${formatDate(item.issueDate)}
-Fitness: ${formatDate(item.fitness)}
-Validity: ${formatDate(item.validity)}
-Mobile: ${item.primaryMobile}
-                  `.trim();
-
-                  navigator.clipboard.writeText(text);
-                }}
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl shadow transition"
+                onClick={() => navigator.clipboard.writeText(copyText)}
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl transition"
               >
                 Copy Information
               </button>
 
               <button
                 onClick={() => window.print()}
-                className="w-full bg-slate-900 hover:bg-slate-800 text-white font-semibold py-3 rounded-xl shadow transition"
+                className="w-full bg-slate-900 hover:bg-slate-800 text-white font-semibold py-3 rounded-xl transition"
               >
                 Print
               </button>
