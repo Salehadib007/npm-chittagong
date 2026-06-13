@@ -72,10 +72,10 @@ const EnrollmentProfileView = () => {
           {/* HEADER */}
           <div className="bg-gradient-to-r from-slate-900 to-slate-700 px-6 py-6 text-center">
             <h1 className="text-white text-xl font-bold tracking-wide">
-              Vehicle Pass Information
+              Confidential Information
             </h1>
             <p className="text-slate-300 text-sm mt-1">
-              Official Enrollment Record
+              Official Information Record
             </p>
           </div>
 
